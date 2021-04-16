@@ -4,7 +4,7 @@ const validateSession = require("../middleware/validate-session");
 const { Mamalist } = require("../models");
 
 router.post("/create", validateSession, (req, res) => {
-  if (req.user.role === "admin" || req.user.role === "user") {
+  if (req.user.role == "admin" || req.user.role == "user") {
     const mamaListEntry = {
       brand: req.body.mamalist.brand,
       title: req.body.mamalist.title,
@@ -21,7 +21,7 @@ router.post("/create", validateSession, (req, res) => {
 });
 
 router.get("/", validateSession, (req, res) => {
-  if (req.user.role === "admin" || req.user.role === "user") {
+  if (req.user.role == "admin" || req.user.role == "user") {
     Mamalist.findAll({
       where: { userId: req.user.id },
       include: "user",
@@ -34,7 +34,7 @@ router.get("/", validateSession, (req, res) => {
 });
 
 router.put("/update/:id", validateSession, function (req, res) {
-  if (req.user.role === "admin" || req.user.role === "user") {
+  if (req.user.role == "admin" || req.user.role == "user") {
     const updateEntry = {
       brand: req.body.mamalist.brand,
       title: req.body.mamalist.title,
@@ -57,7 +57,7 @@ router.put("/update/:id", validateSession, function (req, res) {
 });
 
 router.delete("/delete/:id", validateSession, function (req, res) {
-  if (req.user.role === "admin") {
+  if (req.user.role == "admin") {
     const query = { where: { id: req.params.id, userId: req.user.id } };
 
     Mamalist.destroy(query)

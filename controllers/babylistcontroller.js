@@ -4,7 +4,7 @@ const validateSession = require("../middleware/validate-session");
 const { Babylist } = require("../models");
 
 router.post("/create", validateSession, (req, res) => {
-  if (req.user.role === "admin" || req.user.role === "subscriber") {
+  if (req.user.role === "admin" || req.user.role === "user") {
     const babyListEntry = {
       brand: req.body.babylist.brand,
       title: req.body.babylist.title,
@@ -16,12 +16,12 @@ router.post("/create", validateSession, (req, res) => {
       .then((babylist) => res.status(200).json(babylist))
       .catch((err) => res.status(500).json({ error: err }));
   } else {
-    res.json({ message: "Not a subscriber" });
+    res.json({ message: "Not a User" });
   }
 });
 
 router.get("/", validateSession, (req, res) => {
-  if (req.user.role === "admin" || req.user.role === "subscriber") {
+  if (req.user.role === "admin" || req.user.role === "user") {
     Babylist.findAll({
       where: { userId: req.user.id },
       include: "user",
@@ -29,12 +29,12 @@ router.get("/", validateSession, (req, res) => {
       .then((babylist) => res.status(200).json(babylist))
       .catch((err) => res.status(500).json({ error: err }));
   } else {
-    res.json({ message: "Not a subscriber" });
+    res.json({ message: "Not a User" });
   }
 });
 
 router.put("/update/:id", validateSession, function (req, res) {
-  if (req.user.role === "admin" || req.user.role === "subscriber") {
+  if (req.user.role === "admin" || req.user.role === "user") {
     const updateEntry = {
       brand: req.body.babylist.brand,
       title: req.body.babylist.title,
@@ -48,7 +48,7 @@ router.put("/update/:id", validateSession, function (req, res) {
       .then((babylist) => res.status(200).json(babylist))
       .catch((err) => res.status(500).json({ error: err }));
   } else {
-    res.json({ message: "Not a subscriber" });
+    res.json({ message: "Not a User" });
   }
 });
 
