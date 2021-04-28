@@ -1,5 +1,6 @@
 require("dotenv").config();
 let express = require("express");
+
 let app = express();
 let db = require("./db");
 
@@ -8,7 +9,7 @@ let babylist = require("./controllers/babylistcontroller");
 let mamalist = require("./controllers/mamalistcontroller");
 
 app.use(express.json());
-
+app.use(require("./middleware/headers"));
 app.use("/user", user);
 app.use("/mamalist", mamalist);
 app.use("/babylist", babylist);

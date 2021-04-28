@@ -8,8 +8,10 @@ router.post("/create", validateSession, (req, res) => {
     const babyListEntry = {
       brand: req.body.babylist.brand,
       title: req.body.babylist.title,
+      quantity: req.body.babylist.quantity,
       price: req.body.babylist.price,
       store: req.body.babylist.store,
+      image: req.body.babylist.image,
       userId: req.user.id,
     };
     Babylist.create(babyListEntry)
@@ -38,8 +40,10 @@ router.put("/update/:id", validateSession, function (req, res) {
     const updateEntry = {
       brand: req.body.babylist.brand,
       title: req.body.babylist.title,
+      quantity: req.body.babylist.quantity,
       price: req.body.babylist.price,
       store: req.body.babylist.store,
+      image: req.body.babylist.image,
     };
 
     const query = { where: { id: req.params.id, userId: req.user.id } };
