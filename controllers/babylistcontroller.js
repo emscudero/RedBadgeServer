@@ -11,7 +11,7 @@ router.post("/create", validateSession, (req, res) => {
       quantity: req.body.babylist.quantity,
       price: req.body.babylist.price,
       store: req.body.babylist.store,
-      image: req.body.babylist.image,
+      photo: req.body.babylist.photo,
       userId: req.user.id,
     };
     Babylist.create(babyListEntry)
@@ -28,7 +28,7 @@ router.get("/", validateSession, (req, res) => {
       where: { userId: req.user.id },
       include: "user",
     })
-      .then((babylist) => res.status(200).json(babylist))
+      .then((babyList) => res.status(200).json(babyList))
       .catch((err) => res.status(500).json({ error: err }));
   } else {
     res.json({ message: "Not a User" });
@@ -43,7 +43,7 @@ router.put("/update/:id", validateSession, function (req, res) {
       quantity: req.body.babylist.quantity,
       price: req.body.babylist.price,
       store: req.body.babylist.store,
-      image: req.body.babylist.image,
+      photo: req.body.babylist.photo,
     };
 
     const query = { where: { id: req.params.id, userId: req.user.id } };

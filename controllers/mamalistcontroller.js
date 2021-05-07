@@ -8,10 +8,10 @@ router.post("/create", validateSession, (req, res) => {
     const mamaListEntry = {
       brand: req.body.mamalist.brand,
       title: req.body.mamalist.title,
-      quantity: req.body.babylist.quantity,
+      quantity: req.body.mamalist.quantity,
       price: req.body.mamalist.price,
       store: req.body.mamalist.store,
-      image: req.body.babylist.image,
+      photo: req.body.mamalist.photo,
       userId: req.user.id,
     };
     Mamalist.create(mamaListEntry)
@@ -40,10 +40,10 @@ router.put("/update/:id", validateSession, function (req, res) {
     const updateEntry = {
       brand: req.body.mamalist.brand,
       title: req.body.mamalist.title,
-      quantity: req.body.babylist.quantity,
+      quantity: req.body.mamalist.quantity,
       price: req.body.mamalist.price,
       store: req.body.mamalist.store,
-      image: req.body.babylist.image,
+      photo: req.body.mamalist.photo,
     };
     console.log(req.user.id);
     console.log(req.params.id);
